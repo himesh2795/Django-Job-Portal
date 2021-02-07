@@ -1,4 +1,6 @@
 from django.db import models
+
+
 # from django.contrib.auth.models import User, Group
 
 
@@ -19,9 +21,6 @@ class RecruiterTbl(models.Model):
     number = models.IntegerField(null=True)
     organization = models.CharField(null=False, max_length=250)
     location = models.CharField(max_length=250, null=False)
-    # profile = models.CharField(max_length=250, null=False)
-
-    # user_type = models.CharField(max_length=250, null=True)
 
     class Meta:
         verbose_name = "Recruiter"
@@ -32,9 +31,6 @@ class RecruiterTbl(models.Model):
 
 
 class JobSeekerTbl(models.Model):
-    # user = models.OneToOneField(User, related_name='job_seeker', on_delete=models.CASCADE)
-    # user_type = models.CharField(max_length=250, null=True)
-    # profile = models.CharField(max_length=250, null=True)
     first_name = models.CharField(null=False, max_length=250)
     last_name = models.CharField(null=False, max_length=250)
     email = models.CharField(null=False, max_length=250, unique=True)
@@ -53,22 +49,20 @@ class JobSeekerTbl(models.Model):
 
 
 class JobPost(models.Model):
-    recruiter = models.ForeignKey(
-        RecruiterTbl, related_name="recruiter", on_delete=models.CASCADE)
+    recruiter = models.ForeignKey(RecruiterTbl, related_name="recruiter", on_delete=models.CASCADE)
     position = models.CharField(max_length=250)
     organization = models.CharField(max_length=250)
     location = models.CharField(max_length=250)
     salary = models.CharField(max_length=500)
     skills = models.CharField(max_length=1000)
-
     responsibilites = models.TextField()
     profile = models.TextField()
     education = models.TextField()
-
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.position
+
 
 class AppliedJobsTbl(models.Model):
     job_post = models.ForeignKey(JobPost, related_name='job_post', on_delete=models.CASCADE)
@@ -78,4 +72,3 @@ class AppliedJobsTbl(models.Model):
     class Meta:
         verbose_name = "Applied Job"
         verbose_name_plural = "Applied Jobs"
-
