@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
-from Portal.serializers import *
 from . import JobSeekerViews
 from . import RecruiterViews
 from Portal.forms import *
-from datetime import datetime
 
 
 # Create your views here.
