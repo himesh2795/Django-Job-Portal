@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . import JobSeekerViews
 from . import RecruiterViews
 from Portal.forms import *
+from Portal.models import JobPost
 
 
 # Create your views here.
@@ -147,3 +148,12 @@ def LogoutView(request):
         pass
 
     return redirect("indexpage")
+
+def SearchJobView(request):
+    try:
+        print("\n\n\n\nRequest GET : ", request.GET)
+        jobs = JobPost.objects.filter(position__contains=request.GET.get('position'))
+        print("Jobs :", jobs)
+        return render(request, "search.html", {"jobs":jobs})
+    except Exception as e:
+        print("Error : ", e)

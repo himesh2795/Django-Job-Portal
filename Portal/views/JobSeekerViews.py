@@ -25,7 +25,6 @@ def JobSeekerHomePage(request):
         if not found_applied:
             data.append(job)
 
-
     return render(request, "job_seeker/home.html", {"first_name": job_seeker_obj[0].first_name, "jobs": data})
 
 
@@ -75,7 +74,8 @@ def ProfileEdit(request):
 
     if request.method == "POST":
 
-        job_seeker_form = JobSeekerForm(request.POST, instance=job_seeker_obj[0])
+        job_seeker_form = JobSeekerForm(
+            request.POST, instance=job_seeker_obj[0])
         if job_seeker_form.is_valid():
             job_seeker = job_seeker_form.save()
         else:
@@ -97,9 +97,19 @@ def ViewDetails(request, pk=None):
 
     post = JobPost.objects.filter(pk=pk)
     if post:
-        post[0].responsibilites = [line.strip('-') for line in post[0].responsibilites.split("\n") if line.strip()]
-        post[0].profile = [line.strip('-') for line in post[0].profile.split("\n") if line.strip()]
-        post[0].education = [line.strip('-') for line in post[0].education.split("\n") if line.strip()]
+
+        post[0].responsibilites = [line.strip(
+            '-') for line in post[0].responsibilites.split("\n") if line.strip()]
+        post[0].profile = [line.strip(
+            '-') for line in post[0].profile.split("\n") if line.strip()]
+        post[0].education = [line.strip(
+            '-') for line in post[0].education.split("\n") if line.strip()]
+
+        exist = AppliedJobsTbl.objects.filter(
+            job_post=post[0], job_seeker=job_seeker_obj[0])
+        if exist:
+            return render(request, "recruiter/job_details.html", {"post": post[0], "msg": "Applied"})
+
         return render(request, "job_seeker/job_details.html", {"post": post[0]})
     else:
         return redirect('jobseekerhomepage')
@@ -117,7 +127,8 @@ def ApplyJob(request, pk=None):
         job_post = JobPost.objects.filter(pk=pk)
         if job_post:
             try:
-                applied_job = AppliedJobsTbl.objects.create(job_post=job_post[0], job_seeker=job_seeker_obj[0])
+                applied_job = AppliedJobsTbl.objects.create(
+                    job_post=job_post[0], job_seeker=job_seeker_obj[0])
             except Exception as e:
                 return render(request, "job_seeker/job_details.html", {"post": job_post[0], "msg": str(e)})
 

@@ -52,7 +52,9 @@
     </header>
 
     <main>
+    
         <div class="container">
+        
             <div class="card mt-5 border-5 pt-2 active pb-0 px-3">
                 <form action="{% url 'applied_jobs' %}">
                     <center><button style="text-align:right;" class="btn btn-dark"> Applied Jobs </button></center>
@@ -61,6 +63,12 @@
                 <h3><b><center> Jobs </center><b></h3>
                 
             </div>
+            <br>
+            <center><form action="{% url 'search' %}">
+                                  <input type="text" placeholder="Job Title" name="position" required="">
+                                  <button type="submit" class="btn btn-info">Search</button>
+                                  <!-- <i class="fa fa-search"></i> -->
+                                </form></center>
             {% for job in jobs %}
             <div class="card mt-5 border-5 pt-2 active pb-0 px-3">
                 <div class="card-body ">

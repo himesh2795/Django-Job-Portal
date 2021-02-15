@@ -8,6 +8,7 @@ urlpatterns = [
     path('register/', views.RegisterPageView, name='registerpage'),
     path('about/', views.AboutView, name='aboutpage'),
     path('logout/', views.LogoutView, name='logout'),
+    path('search/', views.SearchJobView, name="search"),
 
     # Job Seeker
     path('job/home', views.JobSeekerViews.JobSeekerHomePage, name="jobseekerhomepage"),

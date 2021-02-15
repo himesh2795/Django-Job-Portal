@@ -56,10 +56,10 @@
                             <h4 class="card-title "><b>{{post.position}}</b></h4>
                         </div>
                         <div class="col">
-                            
+
                             <h6 class="card-subtitle mb-2 text-muted">
-                                    <p class="card-text text-muted small ">  <span class="font-weight-bold"> Posted on
-                                            </span> {{post.posted_on}} </p>
+                                <p class="card-text text-muted small "> <span class="font-weight-bold"> Posted on
+                                    </span> {{post.posted_on}} </p>
                             </h6>
                             <br>
                             <h6 class="card-subtitle mb-2 text-muted">
@@ -71,47 +71,56 @@
                                 <p class="card-subtitle mb-2 text-muted"> Skills : {{post.skills}}</p>
                             </h6>
                         </div>
+
                     </div>
+                    <div class="card-footer bg-white px-0 ">
+                        <div class="row">
+                        {% if msg %}
+                        <div class="alert alert-info">
+                            <strong>{{msg}}</strong>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-                
+                </div>
             </div>
 
             <div class="card mt-5 border-5 pt-2 active pb-0 px-3">
                 <div class="card-body ">
                     <h5><b>Job description</b></h5>
-                    <br/>
+                    <br />
                     <u><b>Roles and Responsibilities:</b></u>
                     <ul>
-                        <br/>
-                        
+                        <br />
+
                         {% for line in post.responsibilites %}
-                            <li> {{line}} </li>
+                        <li> {{line}} </li>
                         {% endfor %}
                     </ul>
-                    
-                    <br/>
+
+                    <br />
                     <u><b>Profile</b></u>
                     <ul>
-                        <br/>
+                        <br />
                         {% for line in post.profile %}
-                            <li> {{line}} </li>
+                        <li> {{line}} </li>
                         {% endfor %}
                     </ul>
 
-                    <br/>
+                    <br />
                     <u><b>Education</b></u>
                     <ul>
-                        <br/>
+                        <br />
                         {% for line in post.education %}
-                            <li> {{line}} </li>
+                        <li> {{line}} </li>
                         {% endfor %}
                     </ul>
 
-                    
+
                 </div>
             </div>
-            <br/>
-            <br/>
+            <br />
+            <br />
         </div>
     </main>
 </body>
