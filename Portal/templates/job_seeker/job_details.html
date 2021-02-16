@@ -32,6 +32,7 @@
                     </li>
                 </ul>
             </div>
+            {% if logged %}
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -44,6 +45,7 @@
                     </li>
                 </ul>
             </div>
+            {% endif %}
         </nav>
     </header>
 
@@ -79,12 +81,21 @@
                     </div>
                 </div>
                 <div class="card-footer bg-white px-0 ">
+                    {% if logged %}
                     <div class="row">
                         <div class=" col-md-auto "> <a href="{% url 'applyjob' pk=post.pk %}"
                                 class="btn btn-outlined btn-black text-muted bg-transparent" data-wow-delay="0.7s">
                                 <p class="btn btn-info">Apply</p>
                             </a> <i class="mdi mdi-settings-outline"></i> </div>
                     </div>
+                    {% else %}
+                    <div class="row">
+                        <div class=" col-md-auto "> <a href="{% url 'applyjob' pk=post.pk %}"
+                                class="btn btn-outlined btn-black text-muted bg-transparent" data-wow-delay="0.7s">
+                                <p class="btn btn-success">{{login_msg}}</p>
+                            </a> <i class="mdi mdi-settings-outline"></i> </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
 

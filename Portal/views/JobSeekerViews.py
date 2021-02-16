@@ -88,16 +88,18 @@ def ProfileEdit(request):
 
 
 def ViewDetails(request, pk=None):
+    logged = True
     if not request.session.get('id'):
-        return redirect('loginpage')
-    job_seeker_id = request.session.get('id')
-    job_seeker_obj = JobSeekerTbl.objects.filter(id=job_seeker_id)
-    if not job_seeker_obj:
-        return redirect('loginpage')
+        logged = False
+
+        # return redirect('loginpage')
+    # job_seeker_id = request.session.get('id')
+    # job_seeker_obj = JobSeekerTbl.objects.filter(id=job_seeker_id)
+    # if not job_seeker_obj:
+    #     return redirect('loginpage')
 
     post = JobPost.objects.filter(pk=pk)
     if post:
-
         post[0].responsibilites = [line.strip(
             '-') for line in post[0].responsibilites.split("\n") if line.strip()]
         post[0].profile = [line.strip(
@@ -105,12 +107,14 @@ def ViewDetails(request, pk=None):
         post[0].education = [line.strip(
             '-') for line in post[0].education.split("\n") if line.strip()]
 
-        exist = AppliedJobsTbl.objects.filter(
-            job_post=post[0], job_seeker=job_seeker_obj[0])
-        if exist:
-            return render(request, "recruiter/job_details.html", {"post": post[0], "msg": "Applied"})
+        if logged: 
+            job_seeker_obj = JobSeekerTbl.objects.filter(id=request.session.get('id'))
+            exist = AppliedJobsTbl.objects.filter(
+                job_post=post[0], job_seeker=job_seeker_obj[0])
+            if exist:
+                return render(request, "recruiter/job_details.html", {"post": post[0], "msg": "Applied"})
 
-        return render(request, "job_seeker/job_details.html", {"post": post[0]})
+        return render(request, "job_seeker/job_details.html", {"post": post[0], "logged":logged, "login_msg":"Login to Apply"})
     else:
         return redirect('jobseekerhomepage')
 
