@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    {% comment %} <h1>Job Seeker Home Page</h1> {% endcomment %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    
+    
+
+
+</head>
+
+<body>
+    
+
+    <main>
+        <div class="container">
+            <div class="card mt-5 border-5 pt-2 active pb-0 px-3">
+                
+                
+                <h3><b><center> Jobs </center><b></h3>
+                
+            </div>
+            {% for job in jobs %}
+            <div class="card mt-5 border-5 pt-2 active pb-0 px-3">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <h4 class="card-title "><b>{{job.position}}</b></h4>
+                        </div>
+                        <div class="col">
+                            
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <p class="card-text text-muted small "> Posted by <span class="font-weight-bold">
+                                    {{job.organization}} </span> on {{job.posted_on}}</p>
+                            </h6>
+                            <br>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span><span
+                                        class="font-weight-bold"> {{job.organization}} </span> </p>
+                                <p class="card-text"> <span class="glyphicon glyphicon-map-marker"></span><span
+                                        class="font-weight-bold"> {{job.location}} </span> </p>
+                                <p class="card-text"><span class="font-weight-bold"> {{job.salary}} </span> </p>
+                                <p class="card-subtitle mb-2 text-muted"> Skills : {{job.skills}}</p>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-white px-0 ">
+                    <div class="row">
+
+
+                        <div class=" col-md-auto "> <a href="{% url 'jobdetails' pk=job.pk %}"
+                                class="btn btn-outlined btn-black text-muted bg-transparent" data-wow-delay="0.7s">
+                                <p class="btn btn-primary">View Details</p>
+                            </a> <i class="mdi mdi-settings-outline"></i> </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <br><br>
+
+        </div>
+    </main>
+</body>
+
+
+
+<style>
+    body {
+        font-family: 'Rubik', sans-serif;
+        height: 100% !important;
+        background-color: #3F51B5 !important
+    }
+
+    #star {
+        margin-left: -5px !important;
+        vertical-align: bottom !important;
+        opacity: 0.5
+    }
+
+    .more {
+        opacity: 0.5 !important
+    }
+
+    .btn:hover {
+        color: black !important
+    }
+
+    .vl {
+        margin: 8px !important;
+        width: 2px;
+        border-right: 1px solid #aaaaaa;
+        height: 25px
+    }
+
+    #plus {
+        opacity: 0.8
+    }
+
+    .card {
+        border-radius: 10px !important
+    }
+
+    a:hover {
+        background-color: #ccc !important
+    }
+
+    .btn-outlined:active {
+        color: #FFF;
+        border-color: #fff !important
+    }
+
+    img {
+        cursor: pointer;
+        overflow: visible
+    }
+
+    .btn:focus,
+    .btn:active {
+        outline: none !important;
+        box-shadow: none !important
+    }
+
+    .container {
+        margin-top: 100px !important
+    }
+
+    
+</style>
+
+</html>
